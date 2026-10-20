@@ -32,7 +32,7 @@ final class ServiceConfig
      * @param list<array{authority:string, authority_configuration_url:string}> $trustedAuthorities trusted Federated Authorities
      * @param array{authority:string, authority_configuration_url:string}|null $serviceAuthority your own Service Authority, if any
      * @param list<array{name:string, description?:string}>|callable(array):list<array{name:string, description?:string}> $scopes
-     * @param null|callable(string $destinationUrl, Delegation $d):bool $destinationPolicy extra allow-policy for browser destinations (same-origin is always enforced)
+     * @param null|callable(string $destinationUrl, array $validation):bool $destinationPolicy extra allow-policy (gets the Authority validation response; empty array when re-checking a stored destination) for browser destinations (same-origin is always enforced)
      * @param null|callable(string $event, array $context):void $logger audit hook (user, agent, task, authority, outcome)
      */
     public function __construct(
