@@ -36,7 +36,8 @@ $pdo->exec('CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY AUTOINCREM
 $service = new Service(new ServiceConfig(
     origin: $cfg['origin'],
     signingKeyPem: (string) file_get_contents($cfg['key_file']),
-    trustedAuthorities: [ServiceConfig::authority($cfg['authority'])],
+    // 'extra_authorities' => [['https://other-authority.example', 'https://other-authority.example/.../ap'], ...] (optional)
+    trustedAuthorities: array_merge([ServiceConfig::authority($cfg['authority'])], array_map(fn (array $a) => ServiceConfig::authority($a[0], $a[1] ?? null), $cfg['extra_authorities'] ?? [])),
     scopes: $SCOPES,
     store: $store,
     name: $cfg['name'],

@@ -8,5 +8,6 @@ return [
     'db_file' => __DIR__ . '/data/todo.sqlite',
     'check_cache_seconds' => 60,                     // how long a successful authorization-check is trusted (max 60)
     'ca_bundle' => null,                             // custom CA bundle (tests only)
+    // 'extra_authorities' => [['https://authority.example', 'https://authority.example/agentpass/ap']], // more federated Authorities to trust
     'dns' => [],                                     // static TXT answers (tests only), e.g. ['_agentpass.example.com' => []]
 ];
