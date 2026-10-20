@@ -1,0 +1,5 @@
+body{font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:#18181b;background:#fafafa;margin:0}
+main{max-width:40rem;margin:3rem auto;padding:0 1rem}h1{font-size:1.5rem;letter-spacing:-.02em}
+.who{color:#52525b}.notice{background:#fef2f2;border:1px solid #fecaca;padding:.5rem .75rem;border-radius:.5rem;color:#991b1b}
+ul{padding-left:1.2rem}li form{display:inline;margin-left:.5rem}button{font:inherit;padding:.2rem .6rem;border-radius:.4rem;border:1px solid #d4d4d8;background:#fff;cursor:pointer}
+input{font:inherit;padding:.25rem .5rem;border:1px solid #a1a1aa;border-radius:.4rem}code{background:#f4f4f5;padding:0 .25rem;border-radius:.25rem}

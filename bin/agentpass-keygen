@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+// Generate an ES256 (P-256) Service signing key.
+//   php bin/agentpass-keygen /home/you/agentpass-key.pem
+// Keep the .pem OUTSIDE public_html. The SDK publishes the public half at {basePath}/jwks.json.
+declare(strict_types=1);
+foreach ([__DIR__ . '/../vendor/autoload.php', __DIR__ . '/../../../autoload.php'] as $a) { if (is_file($a)) { require $a; break; } }
+$out = $argv[1] ?? null;
+if (!$out) { fwrite(STDERR, "usage: agentpass-keygen <path/to/key.pem>\n"); exit(2); }
+if (file_exists($out)) { fwrite(STDERR, "refusing to overwrite $out\n"); exit(1); }
+$k = \AgentPass\Service\Keys::generate();
+$old = umask(0077);
+file_put_contents($out, $k['private_pem']);
+umask($old);
+@chmod($out, 0600);
+echo "Wrote $out (keep it private).\nkid: {$k['kid']}\npublic JWK: " . json_encode($k['public_jwk'], JSON_UNESCAPED_SLASHES) . "\n";
