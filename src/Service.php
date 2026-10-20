@@ -165,7 +165,13 @@ final class Service
             $cfg = $this->authorityConfig($trusted['authority_configuration_url']);
             if ($cfg['authority'] !== $trusted['authority']) { throw new \RuntimeException('authority mismatch'); }
             JWT::$leeway = self::SKEW;
-            $claims = (array) JWT::decode($jwt, JWK::parseKeySet($this->fetchJson($cfg['jwks_uri'], 300), 'ES256'));
+            try {
+                $claims = (array) JWT::decode($jwt, JWK::parseKeySet($this->fetchJson($cfg['jwks_uri'], 300), 'ES256'));
+            } catch (\UnexpectedValueException $e) {
+                // Key rotation: refetch the Authority JWKS once, at most every 30 s per URL (bounds amplification).
+                if (!$this->c->store->claimOnce('jwks-refetch|' . $cfg['jwks_uri'], time() + 30)) { throw $e; }
+                $claims = (array) JWT::decode($jwt, JWK::parseKeySet($this->fetchJson($cfg['jwks_uri'], 300, true), 'ES256'));
+            }
         } catch (\Throwable) {
             throw new AgentPassError(401, 'invalid_assertion', 'Authority assertion verification failed');
         }
@@ -375,10 +381,10 @@ final class Service
         return $cfg;
     }
 
-    private function fetchJson(string $url, int $ttl): array
+    private function fetchJson(string $url, int $ttl, bool $fresh = false): array
     {
         $key = 'json|' . $url;
-        $hit = $this->c->store->cacheGet($key);
+        $hit = $fresh ? null : $this->c->store->cacheGet($key);
         if (is_array($hit)) { return $hit; }
         $r = $this->c->http->request('GET', $url, ['Accept' => 'application/json']);
         $j = json_decode($r['body'], true);
