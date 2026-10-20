@@ -12,7 +12,8 @@ use Firebase\JWT\JWT;
  */
 final class Service
 {
-    public const VERSION = '0.1';
+    public const VERSION = '0.1';          // AgentPass protocol version
+    public const SDK_VERSION = '0.1.0';
     private const SKEW = 60;
 
     public function __construct(private ServiceConfig $c) {}
