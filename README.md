@@ -1,5 +1,10 @@
 # identvia/agentpass-php
 
+[![Packagist Version](https://img.shields.io/packagist/v/identvia/agentpass-php)](https://packagist.org/packages/identvia/agentpass-php)
+[![PHP](https://img.shields.io/packagist/dependency-v/identvia/agentpass-php/php)](https://packagist.org/packages/identvia/agentpass-php)
+[![CI](https://github.com/Identvia/agentpass-php/actions/workflows/ci.yml/badge.svg)](https://github.com/Identvia/agentpass-php/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 AgentPass v0.1 **Service** SDK for PHP 8.1+. It lets AI agents act for your users at your site, with the
 user's explicit approval at a trusted Authority such as [Identvia](https://identvia.com). Each AgentPass is
 **single-use**, **holder-bound** (proof of possession) and **task-scoped**. Delegations are re-checked

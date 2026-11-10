@@ -3,8 +3,27 @@
     "description": "AgentPass v0.1 Service SDK for PHP: let AI agents act for your users with single-use, holder-bound, task-scoped passes from a trusted Authority (e.g. Identvia). DNS discovery, config, authority resolution, redemption to a browser session or bearer token, continuous revocation checks.",
     "type": "library",
     "license": "MIT",
-    "keywords": ["agentpass", "ai agents", "delegation", "identvia", "authorization"],
-    "homepage": "https://identvia.com/developers/docs/agentpass",
+    "keywords": [
+        "agentpass",
+        "ai agents",
+        "delegation",
+        "identvia",
+        "authorization"
+    ],
+    "homepage": "https://identvia.com",
+    "authors": [
+        {
+            "name": "Identvia",
+            "email": "hello@identvia.com",
+            "homepage": "https://identvia.com"
+        }
+    ],
+    "support": {
+        "email": "hello@identvia.com",
+        "issues": "https://github.com/Identvia/agentpass-php/issues",
+        "source": "https://github.com/Identvia/agentpass-php",
+        "docs": "https://id.identvia.com/developers/docs/agentpass"
+    },
     "require": {
         "php": ">=8.1",
         "ext-json": "*",
@@ -17,12 +36,23 @@
         "phpunit/phpunit": "^10.5"
     },
     "autoload": {
-        "psr-4": { "AgentPass\\Service\\": "src/" }
+        "psr-4": {
+            "AgentPass\\Service\\": "src/"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "AgentPass\\Service\\Tests\\": "tests/" }
+        "psr-4": {
+            "AgentPass\\Service\\Tests\\": "tests/"
+        }
     },
-    "bin": ["bin/agentpass-keygen"],
-    "config": { "sort-packages": true, "platform": { "php": "8.1.0" } },
+    "bin": [
+        "bin/agentpass-keygen"
+    ],
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.1.0"
+        }
+    },
     "minimum-stability": "stable"
 }
